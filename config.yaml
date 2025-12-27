@@ -1,0 +1,46 @@
+# Audio Classification Configuration
+
+data:
+  dataset_path: "data/ICBHI"
+  sample_rate: 16000
+  n_mels: 128
+  n_fft: 2048
+  hop_length: 512
+  duration: 5.0  # seconds
+  augmentation: true
+  train_split: 0.7
+  val_split: 0.15
+  test_split: 0.15
+
+model:
+  architecture: "cnn"  # Options: "cnn", "resnet"
+  num_classes: 4
+  dropout:  0.3
+
+training:
+  batch_size: 32
+  epochs: 100
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  optimizer: "adam"  # Options: "adam", "sgd", "adamw"
+  scheduler: "cosine"  # Options: "cosine", "plateau", "step"
+  mixed_precision: true
+  gradient_accumulation_steps: 2
+  early_stopping_patience: 15
+  checkpoint_dir: "checkpoints"
+  log_dir:  "runs"
+  save_every:  5  # Save checkpoint every N epochs
+
+device:
+  use_cuda: true
+  num_workers: 4
+  pin_memory: true
+
+classes:
+  - "normal"
+  - "crackles"
+  - "wheezes"
+  - "both"
+
+# Random seed for reproducibility
+seed: 42
