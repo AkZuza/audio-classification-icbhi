@@ -8,7 +8,7 @@ import torch
 from src.data.dataset import ICBHIDataset
 from src.models.cnn import LightweightCNN
 from src.models.resnet import CompactResNet
-from src.training.trainer import Trainer
+from src.training.trainer_fixed import Trainer
 from src.utils.config import load_config, set_seed, get_device
 from src.utils.metrics import plot_training_history
 
