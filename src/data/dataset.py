@@ -67,7 +67,7 @@ class ICBHIDataset(Dataset):
             raise ValueError(f"Audio directory not found: {audio_dir}")
 
         # Get all . wav files
-        wav_files = sorted(audio_dir.glob("*. wav"))
+        wav_files = sorted(audio_dir.glob("*.wav"))
 
         for wav_file in wav_files:
             txt_file = wav_file.with_suffix(".txt")

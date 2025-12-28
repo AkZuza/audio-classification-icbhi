@@ -6,11 +6,11 @@ data:
   n_mels: 128
   n_fft: 2048
   hop_length: 512
-  duration: 5.0  # seconds
+  duration: 8.0  # seconds
   augmentation: true
   train_split: 0.7
-  val_split: 0.15
-  test_split: 0.15
+  val_split: 0.4
+  test_split: 0.3
 
 model:
   architecture: "cnn"  # Options: "cnn", "resnet"
@@ -20,7 +20,7 @@ model:
 training:
   batch_size: 32
   epochs: 100
-  learning_rate: 0.001
+  learning_rate: 0.003
   weight_decay: 0.0001
   optimizer: "adam"  # Options: "adam", "sgd", "adamw"
   scheduler: "cosine"  # Options: "cosine", "plateau", "step"
