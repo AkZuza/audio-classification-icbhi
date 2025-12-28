@@ -146,7 +146,7 @@ class TrainerWithICBHI:
             inputs, labels = inputs.to(self.device), labels.to(self.device)
 
             if self.mixed_precision:
-                with torch.cuda.amp.autocast():
+                with torch.amp.autocast('cuda'):
                     outputs = self. model(inputs)
                     loss = self.criterion(outputs, labels)
                     loss = loss / self.gradient_accumulation_steps
@@ -201,7 +201,7 @@ class TrainerWithICBHI:
                 inputs, labels = inputs.to(self.device), labels.to(self.device)
 
                 if self.mixed_precision:
-                    with torch.cuda. amp.autocast():
+                    with torch.amp.autocast('cuda'):
                         outputs = self.model(inputs)
                         loss = self.criterion(outputs, labels)
                 else:
@@ -273,7 +273,7 @@ class TrainerWithICBHI:
             # Print epoch summary
             print(
                 f"\nEpoch {epoch + 1}/{self.epochs} - "
-                f"Train Loss: {train_loss:.4f}, Train Acc: {train_acc:. 2f}% - "
+                f"Train Loss: {train_loss:.4f}, Train Acc: {train_acc:.2f}% - "
                 f"Val Loss:  {val_loss:.4f}, Val Acc: {val_acc:.2f}% - "
                 f"ICBHI:  {icbhi_metrics['icbhi_score']:.4f} "
                 f"(Sens: {icbhi_metrics['avg_sensitivity']:.4f}, "
