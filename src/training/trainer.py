@@ -103,7 +103,7 @@ class Trainer:
             self.scheduler = None
 
         # Mixed precision scaler
-        self.scaler = torch.cuda. amp.GradScaler() if self.mixed_precision else None
+        self.scaler = torch.amp.GradScaler('cuda') if self.mixed_precision else None
 
         # Checkpoint directory
         self.checkpoint_dir = Path(config["training"]["checkpoint_dir"])
@@ -138,7 +138,7 @@ class Trainer:
 
             # Mixed precision forward pass
             if self.mixed_precision:
-                with torch.cuda.amp.autocast():
+                with torch.amp.autocast('cuda'):
                     outputs = self.model(inputs)
                     loss = self.criterion(outputs, labels)
                     loss = loss / self.gradient_accumulation_steps
@@ -196,7 +196,7 @@ class Trainer:
 
                 # Forward pass
                 if self.mixed_precision:
-                    with torch. cuda.amp.autocast():
+                    with torch.amp.autocast('cuda'):
                         outputs = self.model(inputs)
                         loss = self.criterion(outputs, labels)
                 else:
@@ -260,8 +260,8 @@ class Trainer:
 
             # Print epoch summary
             print(
-                f"\nEpoch {epoch + 1}/{self.epochs} - "
-                f"Train Loss: {train_loss:.4f}, Train Acc: {train_acc:. 2f}% - "
+                f"\nEpoch {epoch + 1}/{self.epochs} - " + 
+                f"Train Loss: {train_loss:.4f}, Train Acc: {train_acc:.2f}% - " + 
                 f"Val Loss:  {val_loss:.4f}, Val Acc: {val_acc:.2f}%"
             )
 
@@ -271,7 +271,7 @@ class Trainer:
                 self.patience_counter = 0
                 best_path = self.checkpoint_dir / "best_model.pt"
                 self.save_checkpoint(best_path, epoch, val_loss)
-                print(f"✓ Best model saved with validation loss: {val_loss:. 4f}")
+                print(f"✓ Best model saved with validation loss: {val_loss:.4f}")
             else:
                 self.patience_counter += 1
 
