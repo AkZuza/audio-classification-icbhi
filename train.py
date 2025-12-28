@@ -17,7 +17,7 @@ def parse_args():
     """Parse command-line arguments."""
     parser = argparse.ArgumentParser(description="Train audio classification model")
     parser.add_argument(
-        "--config", type=str, default="config. yaml", help="Path to configuration file"
+        "--config", type=str, default="config.yaml", help="Path to configuration file"
     )
     parser.add_argument("--model", type=str, choices=["cnn", "resnet"], help="Model architecture")
     parser.add_argument("--epochs", type=int, help="Number of epochs")
