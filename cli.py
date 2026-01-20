@@ -15,7 +15,7 @@ from src.utils.config import get_device
 
 def load_model(model_path, device):
     """Load trained model from checkpoint."""
-    checkpoint = torch.load(model_path, map_location=device)
+    checkpoint = torch.load(model_path, map_location=device, weights_only=False)
     config = checkpoint.get("config")
 
     if config is None:
@@ -97,7 +97,7 @@ def classify_command(args):
     print("=" * 60)
     print(f"Audio: {result['audio_path']}")
     print(f"Predicted Class: {result['predicted_class']}")
-    print(f"Confidence: {result['confidence']:. 4f}")
+    print(f"Confidence: {result['confidence']:.4f}")
     print("\nProbabilities:")
     for class_name, prob in result["probabilities"].items():
         print(f"  {class_name}: {prob:.4f}")
