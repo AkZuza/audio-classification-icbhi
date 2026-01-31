@@ -37,7 +37,7 @@ runs/
 logs/
 
 # Data
-data/
+./data/
 *.wav
 *.mp3
 *.flac
